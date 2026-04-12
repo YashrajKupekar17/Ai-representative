@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     pinecone_index_name: str = "ai-persona"
     calcom_api_key: str = ""
     calcom_event_type_id: int = 0
+    calcom_api_version: str = "2024-06-14"
+    calcom_username: str = "yashraj-ml-sxvdwl"
     github_username: str = "YashrajKupekar17"
 
     # Embedding model
