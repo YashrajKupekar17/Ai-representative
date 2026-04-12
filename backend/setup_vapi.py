@@ -24,15 +24,32 @@ from app.core.prompts import get_system_prompt
 VAPI_BASE = "https://api.vapi.ai"
 
 
+VOICE_ADDENDUM = """
+VOICE-SPECIFIC RULES (you are on a phone call):
+- Keep responses SHORT — 2-3 sentences max. Offer to elaborate if they want more.
+- NEVER read out URLs, links, or GitHub paths. Instead say "I can send you the details" or "you'll find it on his GitHub".
+- NEVER read out long lists. Pick the top 2 most relevant items, briefly describe each in one sentence, then say "and several more — want me to go on?"
+- When listing meeting slots, give 3-4 options max, not the entire list.
+- ALWAYS repeat back the chosen time slot to confirm before asking for name/email. Example: "So that's 8:30 AM UTC tomorrow — correct?"
+- Speak naturally. Use contractions. Avoid jargon unless the caller uses it first.
+- Spell out the caller's email back to them letter by letter to confirm before booking.
+
+PRONUNCIATION GUIDE:
+- Yashraj Kupekar is pronounced "Yash-rahj Koo-pay-kar"
+- Guftagu is pronounced "Guf-ta-goo"
+"""
+
+
 def get_assistant_config(server_url: str) -> dict:
     """Build the Vapi assistant configuration."""
+    voice_prompt = get_system_prompt() + VOICE_ADDENDUM
     return {
         "name": "Yashraj AI Persona",
         "model": {
             "provider": "openai",
             "model": "gpt-4o",
             "messages": [
-                {"role": "system", "content": get_system_prompt()},
+                {"role": "system", "content": voice_prompt},
             ],
             "tools": [
                 {
@@ -127,6 +144,26 @@ def get_assistant_config(server_url: str) -> dict:
                 },
             ],
         },
+        "transcriber": {
+            "provider": "deepgram",
+            "model": "nova-2",
+            "keywords": [
+                "Yashraj:3",
+                "Kupekar:3",
+                "Guftagu:2",
+                "LangGraph:2",
+                "LangChain:2",
+                "FastAPI:2",
+                "Pinecone:2",
+                "Whisper:2",
+                "Silero:2",
+                "Scaler:2",
+                "Boardroom:2",
+                "Donna:2",
+                "MongoDB:2",
+                "RAG:2",
+            ],
+        },
         "voice": {
             "provider": "11labs",
             "voiceId": "bIHbv24MWmeRgasZH58o",  # "Will" — natural male voice
@@ -134,9 +171,9 @@ def get_assistant_config(server_url: str) -> dict:
             "similarityBoost": 0.75,
         },
         "firstMessage": (
-            "Hey! I'm Yashraj's AI representative. "
-            "I can tell you about his projects, skills, and experience — "
-            "or help you schedule a call with him. What would you like to know?"
+            "Hey! I represent Yashraj Koo-pay-kar. "
+            "I know all about his work, experience, and what he's built — "
+            "or I can help you schedule a call with him. What would you like to know?"
         ),
         "serverUrl": f"{server_url}/vapi/webhook",
         "endCallFunctionEnabled": True,
