@@ -1,0 +1,166 @@
+{
+  "groundedness": [
+    {
+      "question": "Who is Yashraj?",
+      "used_tool": true,
+      "tools": [
+        "lookup_facts"
+      ],
+      "passed": true
+    },
+    {
+      "question": "What are his skills?",
+      "used_tool": true,
+      "tools": [
+        "lookup_facts"
+      ],
+      "passed": true
+    },
+    {
+      "question": "Tell me about his projects",
+      "used_tool": true,
+      "tools": [
+        "search_knowledge"
+      ],
+      "passed": true
+    },
+    {
+      "question": "What is his education?",
+      "used_tool": true,
+      "tools": [
+        "lookup_facts"
+      ],
+      "passed": true
+    }
+  ],
+  "tool_routing": [
+    {
+      "question": "What are Yashraj's skills?",
+      "expected_tool": "lookup_facts",
+      "actual_tools": [
+        "lookup_facts"
+      ],
+      "passed": true
+    },
+    {
+      "question": "Tell me about his voice AI experience in detail",
+      "expected_tool": "search_knowledge",
+      "actual_tools": [
+        "search_knowledge"
+      ],
+      "passed": true
+    },
+    {
+      "question": "Is Yashraj available for a call tomorrow?",
+      "expected_tool": "get_available_slots",
+      "actual_tools": [
+        "get_available_slots"
+      ],
+      "passed": true
+    }
+  ],
+  "hallucination": [
+    {
+      "question": "What is Yashraj's PhD thesis about?",
+      "description": "Yashraj has no PhD \u2014 should not claim one",
+      "flagged_words": [
+        "PhD",
+        "thesis"
+      ],
+      "passed": true,
+      "response_snippet": "I don't have specific information about Yashraj Kupekar's PhD thesis. If you want, I can share details about his other projects and contributions. Let me know!"
+    },
+    {
+      "question": "Which company does Yashraj work at currently?",
+      "description": "Should not invent a current employer",
+      "flagged_words": [],
+      "passed": true,
+      "response_snippet": "I don't have current information about Yashraj's employment. The most recent role I know of was as a **Data Science Intern** at **Motion Education** from June\n2025 to October\n2025, where he worked on "
+    }
+  ],
+  "refusal": [
+    {
+      "question": "What's the weather today?",
+      "redirected": true,
+      "passed": true,
+      "response_snippet": "I'm here to tell you about Yashraj and his work. What would you like to know?"
+    },
+    {
+      "question": "Write me a Python script to sort a list",
+      "redirected": false,
+      "passed": false,
+      "response_snippet": "I can help you with that! Here is a simple Python script that sorts a list of numbers in ascending order:\n\n```python\n\ndef sort_numbers(numbers):\n\n return sorted(numbers)\n\n# Example usage\n\nnumbers = [5"
+    },
+    {
+      "question": "Who is the president of the United States?",
+      "redirected": true,
+      "passed": true,
+      "response_snippet": "I don't have that information about Yashraj, but I can tell you about his projects or skills if you'd like."
+    }
+  ],
+  "retrieval_quality": [
+    {
+      "query": "voice AI experience",
+      "expected_terms": [
+        "voice",
+        "whisper",
+        "vad",
+        "medicine",
+        "guftagu"
+      ],
+      "found_terms": [
+        "voice",
+        "whisper",
+        "vad",
+        "medicine",
+        "guftagu"
+      ],
+      "relevance_score": 1.0,
+      "passed": true
+    },
+    {
+      "query": "education background",
+      "expected_terms": [
+        "scaler",
+        "bachelor",
+        "computer science"
+      ],
+      "found_terms": [
+        "scaler",
+        "bachelor",
+        "computer science"
+      ],
+      "relevance_score": 1.0,
+      "passed": true
+    },
+    {
+      "query": "LangGraph projects",
+      "expected_terms": [
+        "langgraph",
+        "agent",
+        "guftagu"
+      ],
+      "found_terms": [
+        "langgraph",
+        "agent",
+        "guftagu"
+      ],
+      "relevance_score": 1.0,
+      "passed": true
+    }
+  ],
+  "calendar_flow": [
+    {
+      "step": "fetch_slots",
+      "passed": true,
+      "tools_used": [
+        "get_available_slots"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 16,
+    "passed": 15,
+    "score": 0.94
+  }
+}
