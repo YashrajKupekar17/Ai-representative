@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     # LLM
     llm_model: str = "gpt-4o"
 
+    # Vapi
+    vapi_api_key: str = ""
+
     class Config:
         env_file = ".env"
 

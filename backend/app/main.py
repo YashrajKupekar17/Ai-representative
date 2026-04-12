@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.middleware.logging import RequestLoggingMiddleware
 from app.routers.chat import router as chat_router
+from app.routers.vapi import router as vapi_router
 
 app = FastAPI(
     title="AI Persona API",
@@ -24,6 +25,7 @@ app.add_middleware(RequestLoggingMiddleware)
 
 # --- Routers ---
 app.include_router(chat_router)
+app.include_router(vapi_router)
 
 
 @app.get("/health")
