@@ -1,0 +1,165 @@
+# ============================================================
+# Structured knowledge base for deterministic facts.
+# ============================================================
+
+name: "Yashraj Kupekar"
+title: "AI Engineer"
+
+education:
+  degree: "Bachelor of Computer Science"
+  university: "Scaler School of Technology"
+  year: "July 2027"
+  highlights:
+    - "Focused on AI systems, LLMs, and distributed systems"
+    - "Built multiple production-grade AI agents and voice systems"
+    - "Hands-on experience with real-world deployments (FastAPI, Docker, MongoDB)"
+
+experience:
+  - role: "Data Science Intern"
+    company: "Motion Education"
+    period: "Jun 2025 – Oct 2025"
+    highlights:
+      - "Built an end-to-end LLM-powered chatbot for real users using LangChain and LangGraph"
+      - "Implemented ReAct-style agents, agentic routing, and agentic-RAG pipelines"
+      - "Designed multi-turn stateful conversations using OpenAI function calling and context management"
+      - "Optimized for cost-aware prompting and latency"
+      - "Deployed production system using FastAPI, MongoDB, Pinecone, Docker, and Opik"
+
+  - role: "Software Development Intern"
+    company: "EasyTradeWare"
+    period: "Dec 2024 – Feb 2025"
+    highlights:
+      - "Built secure APIs and automation workflows for cryptocurrency trading"
+      - "Processed Binance BTCUSDT data and implemented order book operations"
+      - "Worked on a multi-threaded C++ trading system with WebSocket-based real-time data handling"
+
+skills:
+  languages:
+    - "Python"
+    - "JavaScript"
+    - "TypeScript"
+    - "C++"
+
+  ai_ml:
+    - "LangGraph"
+    - "LangChain"
+    - "OpenAI APIs"
+    - "Anthropic APIs"
+    - "RAG Pipelines"
+    - "Voice AI (Whisper, Silero VAD, Piper TTS, Sarvam AI)"
+    - "Vector Databases (Pinecone, FAISS, ChromaDB)"
+    - "Reinforcement Learning (DQN, Policy Gradient, Q-Learning)"
+    - "PyTorch"
+    - "LSTM / Neural Networks"
+
+  frameworks:
+    - "FastAPI"
+    - "Streamlit"
+    - "React"
+    - "MongoDB"
+
+  tools:
+    - "Pinecone"
+    - "MongoDB"
+    - "Temporal (workflow orchestration)"
+    - "Git"
+    - "Docker"
+    - "LiteLLM"
+    - "Opik (observability)"
+    - "DevOps / DevSecOps"
+
+github_repos:
+  - name: "Guftagu"
+    url: "https://github.com/YashrajKupekar17/Guftagu"
+    one_liner: "Multi-character voice conversational system with agent-based storytelling"
+    tech: ["Python", "LangGraph", "Voice AI", "MongoDB"]
+    tradeoffs: "Focused on multi-agent conversational depth — harder to maintain long-term coherence"
+
+  - name: "Medicine-Voice-ai"
+    url: "https://github.com/YashrajKupekar17/Medicine-Voice-ai"
+    one_liner: "Offline voice AI assistant for pharmacy workflows running fully on edge"
+    tech: ["Python", "Ollama", "Whisper", "FAISS", "SQLite"]
+    tradeoffs: "Local inference ensures privacy and low latency but limits model capability"
+
+  - name: "Retail_agent-"
+    url: "https://github.com/YashrajKupekar17/Retail_agent-"
+    one_liner: "Voice-driven retail intelligence system for staff performance and demand insights"
+    tech: ["Python", "FastAPI", "AI Agents", "LLM"]
+    tradeoffs: "Agentic pipeline adds complexity but enables multi-step reasoning"
+
+  - name: "durable_agent"
+    url: "https://github.com/YashrajKupekar17/durable_agent"
+    one_liner: "Durable AI agent using Temporal for reliable long-running workflows"
+    tech: ["Python", "Temporal", "LLM"]
+    tradeoffs: "Temporal adds infra complexity but guarantees fault tolerance"
+
+  - name: "Boardroom.ai"
+    url: "https://github.com/YashrajKupekar17/Boardroom.ai"
+    one_liner: "Multi-agent solopreneur assistant with domain-specific reasoning agents"
+    tech: ["Python", "LangGraph", "FastAPI", "MongoDB"]
+    tradeoffs: "Multi-agent coordination requires careful prompt and routing design"
+
+  - name: "KV-cache"
+    url: "https://github.com/YashrajKupekar17/KV-cache"
+    one_liner: "Implementation of KV-cache optimization for transformer inference"
+    tech: ["Python", "LLM Internals"]
+    tradeoffs: "Trades memory for faster inference"
+
+  - name: "Ask_Truth"
+    url: "https://github.com/YashrajKupekar17/Ask_Truth"
+    one_liner: "RAG-based chatbot focused on grounded, factual responses"
+    tech: ["Python", "LangChain", "RAG", "Vector DB"]
+    tradeoffs: "Prioritizes factual accuracy over generative fluency"
+
+  - name: "DQN-pytorch-Cartpole-Flappy_bird"
+    url: "https://github.com/YashrajKupekar17/DQN-pytorch-Cartpole-Flappy_bird"
+    one_liner: "Reinforcement learning implementations from scratch in PyTorch"
+    tech: ["Python", "PyTorch", "RL"]
+    tradeoffs: "Built from scratch for learning — higher effort than using libraries"
+
+  - name: "Stock_Price_Prediction"
+    url: "https://github.com/YashrajKupekar17/Stock_Price_Prediction"
+    one_liner: "LSTM-based stock price prediction model"
+    tech: ["Python", "LSTM", "PyTorch"]
+    tradeoffs: "Captures temporal patterns but sensitive to overfitting"
+
+  - name: "End-to-end-AI-Agent"
+    url: "https://github.com/YashrajKupekar17/End-to-end-AI-Agent"
+    one_liner: "Minimal end-to-end AI agent demonstrating lifecycle"
+    tech: ["Python", "LLM"]
+    tradeoffs: "Simplified for clarity over production readiness"
+
+  - name: "Multiple-Personality-Chatbot-"
+    url: "https://github.com/YashrajKupekar17/Multiple-Personality-Chatbot-"
+    one_liner: "Chatbot with multiple personalities using prompt engineering"
+    tech: ["Python", "LLM"]
+    tradeoffs: "Prompt-based personalities less stable than fine-tuning"
+
+  - name: "ImageSegmentation_Graph"
+    url: "https://github.com/YashrajKupekar17/ImageSegmentation_Graph"
+    one_liner: "Graph-based image segmentation using DSU"
+    tech: ["Python", "Graph Algorithms"]
+    tradeoffs: "Interpretable but less powerful than deep learning approaches"
+
+why_hire:
+  - "Built production-grade voice AI systems (Guftagu, Medicine Assistant)"
+  - "Hands-on experience with LangGraph and agentic pipelines"
+  - "Experience with durable systems using Temporal"
+  - "Full-stack AI: RAG, voice agents, RL, backend systems"
+  - "Strong understanding of LLM internals (KV-cache)"
+  - "Ships fast and focuses on real-world systems"
+
+strengths:
+  - "Ships fast and builds end-to-end production systems"
+  - "Full-stack AI expertise across agents, RAG, and voice"
+  - "Strong problem-solving in ambiguous systems"
+  - "Solid fundamentals (RL, LLM internals, algorithms)"
+
+weaknesses:
+  - "Still gaining experience with large-scale distributed systems"
+  - "Early in career but compensates with rapid learning and execution"
+
+availability:
+  timezone: "IST (UTC+5:30)"
+  preferred_days: "Weekdays"
+  note: "Flexible for interviews and discussions"
