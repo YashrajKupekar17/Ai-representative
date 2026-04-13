@@ -4,9 +4,9 @@ A production-grade AI representative that answers questions about me via **chat*
 
 ## Live Demo
 
-- **Chat**: [Coming soon — Vercel deploy]
+- **Chat**: [yashraj-ai-representative.vercel.app](https://yashraj-ai-representative.vercel.app)
 - **Voice**: Call **+1 (475) 222-2335** (Vapi-powered, ElevenLabs TTS)
-- **API**: [Coming soon — Railway deploy]
+- **API**: [ai-representative-production.up.railway.app](https://ai-representative-production.up.railway.app/health)
 
 ## Architecture
 
