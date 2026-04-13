@@ -22,7 +22,7 @@ const PROFILE_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/yashraj-kupekar-8b3a58243/", icon: "linkedin" },
 ];
 
-const PHONE_NUMBER = "+1 (475) 222-2335";
+const PHONE_NUMBER = "+1 (539) 238-4323";
 
 type Source = { tool: string; args: string };
 
