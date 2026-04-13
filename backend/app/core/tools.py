@@ -142,17 +142,23 @@ def execute_tool(name: str, arguments: str) -> str:
         )
         if not slots:
             return "No available slots found in the given date range."
-        # Format slots nicely for the LLM
+        # Format slots in IST for the LLM
         from collections import defaultdict
+        from datetime import datetime, timedelta, timezone
+        IST = timezone(timedelta(hours=5, minutes=30))
         by_date = defaultdict(list)
         for s in slots:
-            date = s["time"][:10]
-            time_str = s["time"][11:16]
-            by_date[date].append(time_str)
+            utc_str = s["time"]
+            utc_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
+            ist_dt = utc_dt.astimezone(IST)
+            date = ist_dt.strftime("%Y-%m-%d")
+            time_str = ist_dt.strftime("%H:%M")
+            by_date[date].append({"display": time_str, "utc": utc_str})
         lines = []
         for date, times in sorted(by_date.items()):
-            lines.append(f"{date}: {', '.join(times)}")
-        return "Available slots (UTC):\n" + "\n".join(lines)
+            slot_strs = [f"{t['display']} IST (UTC: {t['utc']})" for t in times]
+            lines.append(f"{date}: {', '.join(slot_strs)}")
+        return "Available slots (IST):\n" + "\n".join(lines) + "\n\nShow times in IST to the user. Use the UTC value in parentheses for the book_meeting start_time parameter."
 
     elif name == "book_meeting":
         result = book_meeting(
