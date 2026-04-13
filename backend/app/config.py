@@ -24,6 +24,11 @@ class Settings(BaseSettings):
     # Base URL for the API (used for resume download link etc.)
     api_base_url: str = "http://localhost:8000"
 
+    # Opik observability
+    opik_api_key: str = ""
+    opik_workspace: str = ""
+    opik_project: str = "ai-persona"
+
     # Frontend URL for CORS (comma-separated for multiple origins)
     frontend_url: str = "http://localhost:3000"
 

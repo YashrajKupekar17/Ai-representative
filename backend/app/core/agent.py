@@ -1,7 +1,7 @@
 """
 Core agent: GPT-4o with function calling.
 Handles the tool-call loop: LLM decides tools -> execute -> feed back -> generate response.
-Includes semantic caching and observability.
+Includes semantic caching, observability, and Opik tracing.
 """
 
 import time
@@ -14,7 +14,25 @@ from app.core.tools import TOOL_SCHEMAS, execute_tool
 from app.services.cache import cache_lookup, cache_store
 from app.services.observability import AgentTrace, LLMTrace, ToolTrace
 
+# --- Opik setup ---
+_opik_enabled = False
+try:
+    if settings.opik_api_key:
+        import opik
+        from opik.integrations.openai import track_openai
+
+        opik.configure(
+            api_key=settings.opik_api_key,
+            workspace=settings.opik_workspace,
+            force=True,
+        )
+        _opik_enabled = True
+except Exception:
+    pass  # Opik is optional — runs fine without it
+
 client = OpenAI(api_key=settings.openai_api_key)
+if _opik_enabled:
+    client = track_openai(client, project_name=settings.opik_project)
 
 
 def _get_latest_user_query(messages: list[dict]) -> str:
@@ -25,6 +43,19 @@ def _get_latest_user_query(messages: list[dict]) -> str:
     return ""
 
 
+def _track_agent(func):
+    """Apply Opik @track decorator if Opik is enabled, otherwise no-op."""
+    if _opik_enabled:
+        from opik import track
+        return track(
+            name=func.__name__,
+            project_name=settings.opik_project,
+            tags=["agent", f"prompt-v{PROMPT_VERSION}"],
+        )(func)
+    return func
+
+
+@_track_agent
 def run_agent(messages: list[dict]) -> dict:
     """
     Run the agent with a conversation history.
@@ -119,6 +150,7 @@ def run_agent(messages: list[dict]) -> dict:
     }
 
 
+@_track_agent
 def run_agent_streaming(messages: list[dict]):
     """
     Streaming version: yields text chunks as they come.
