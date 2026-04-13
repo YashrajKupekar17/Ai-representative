@@ -9,7 +9,7 @@ import time
 from openai import OpenAI
 
 from app.config import settings
-from app.core.prompts import get_system_prompt, PROMPT_VERSION
+from app.core.prompts import get_system_prompt, PROMPT_VERSION, PROMPT_CHANGELOG, SYSTEM_PROMPT
 from app.core.tools import TOOL_SCHEMAS, execute_tool
 from app.services.cache import cache_lookup, cache_store
 from app.services.observability import AgentTrace, LLMTrace, ToolTrace
@@ -26,6 +26,18 @@ try:
             workspace=settings.opik_workspace,
             force=True,
         )
+
+        # Sync prompt to Opik Prompt Library (auto-versions on change)
+        _opik_client = opik.Opik()
+        _opik_prompt = _opik_client.create_prompt(
+            name="ai-persona-system-prompt",
+            prompt=SYSTEM_PROMPT,
+            metadata={
+                "version": PROMPT_VERSION,
+                "changelog": PROMPT_CHANGELOG.get(PROMPT_VERSION, ""),
+            },
+        )
+
         _opik_enabled = True
 except Exception:
     pass  # Opik is optional — runs fine without it
