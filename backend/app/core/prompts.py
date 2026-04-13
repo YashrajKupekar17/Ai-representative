@@ -1,8 +1,17 @@
-"""System prompt for the AI persona."""
+"""System prompt for the AI persona. Versioned for observability."""
 
 from datetime import datetime
 
 from app.config import settings
+
+# Bump this on every meaningful prompt change.
+# Logged with every agent run so you can trace output back to the exact prompt.
+PROMPT_VERSION = "3"
+PROMPT_CHANGELOG = {
+    "1": "Initial prompt — generic tone, basic tool routing",
+    "2": "Added strict grounding, refusal rules, link formatting, resume download",
+    "3": "Rewrote tone: specific over generic, no filler words, technical depth",
+}
 
 
 def get_system_prompt() -> str:

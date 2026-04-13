@@ -16,6 +16,7 @@ from app.config import settings
 from app.middleware.logging import RequestLoggingMiddleware
 from app.routers.chat import router as chat_router
 from app.routers.vapi import router as vapi_router
+from app.core.prompts import PROMPT_VERSION, PROMPT_CHANGELOG
 from app.services.cache import cache_stats
 
 # --- Structlog: JSON output for production ---
@@ -80,6 +81,14 @@ async def health():
 @app.get("/cache/stats")
 async def get_cache_stats():
     return cache_stats()
+
+
+@app.get("/prompt/version")
+async def prompt_version():
+    return {
+        "version": PROMPT_VERSION,
+        "changelog": PROMPT_CHANGELOG,
+    }
 
 
 @app.get("/resume")

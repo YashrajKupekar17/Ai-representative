@@ -35,6 +35,7 @@ class LLMTrace:
 class AgentTrace:
     """Collects all telemetry for a single agent run."""
     query: str = ""
+    prompt_version: str = ""
     tool_traces: list[ToolTrace] = field(default_factory=list)
     llm_traces: list[LLMTrace] = field(default_factory=list)
     total_duration_ms: int = 0
@@ -77,6 +78,7 @@ class AgentTrace:
         logger.info(
             "agent_run",
             query=self.query[:100],
+            prompt_version=self.prompt_version,
             cache_hit=self.cache_hit,
             iterations=self.iterations,
             tools_called=len(self.tool_traces),

@@ -9,7 +9,7 @@ import time
 from openai import OpenAI
 
 from app.config import settings
-from app.core.prompts import get_system_prompt
+from app.core.prompts import get_system_prompt, PROMPT_VERSION
 from app.core.tools import TOOL_SCHEMAS, execute_tool
 from app.services.cache import cache_lookup, cache_store
 from app.services.observability import AgentTrace, LLMTrace, ToolTrace
@@ -31,7 +31,7 @@ def run_agent(messages: list[dict]) -> dict:
     messages: [{"role": "user"|"assistant", "content": "..."}]
     Returns: {"response": str, "sources": list}
     """
-    trace = AgentTrace(query=_get_latest_user_query(messages))
+    trace = AgentTrace(query=_get_latest_user_query(messages), prompt_version=PROMPT_VERSION)
     agent_start = time.time()
 
     # --- Semantic cache check ---
@@ -127,7 +127,7 @@ def run_agent_streaming(messages: list[dict]):
       ("token", "text...")  -- streamed response tokens
       ("sources", [...])    -- source list at the end
     """
-    trace = AgentTrace(query=_get_latest_user_query(messages))
+    trace = AgentTrace(query=_get_latest_user_query(messages), prompt_version=PROMPT_VERSION)
     agent_start = time.time()
 
     # --- Semantic cache check ---
