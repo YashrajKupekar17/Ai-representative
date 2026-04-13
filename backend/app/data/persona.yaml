@@ -66,6 +66,12 @@ skills:
     - "Git"
 
 github_repos:
+
+  - name: "Medicine-Voice-ai"
+    url: "https://github.com/YashrajKupekar17/Medicine-Voice-ai"
+    one_liner: "Offline voice AI assistant for pharmacy workflows — handles speech, reasoning, retrieval, and response with zero cloud dependency, fully on-device"
+    tech: ["Python", "Ollama", "Whisper", "FAISS", "SQLite", "Piper TTS"]
+    tradeoffs: "Full edge deployment ensures privacy and low latency but limits model capability compared to cloud LLMs — deliberate tradeoff for the pharmacy use case"
   - name: "Guftagu"
     url: "https://github.com/YashrajKupekar17/Guftagu"
     one_liner: "Multi-agent conversational system where specialized agents collaborate to generate coherent, multi-character voice conversations"
@@ -73,12 +79,6 @@ github_repos:
     tech: ["Python", "LangGraph", "Sarvam AI", "FastAPI", "MongoDB"]
     tradeoffs: "Multi-agent coordination is harder to debug and maintain than single-agent — but required for believable multi-character interaction"
     next_phases: "Tackling hard agentic problems: long-term coherence (LLMs forget beyond a few thousand tokens), character consistency (personalities drift mid-conversation), proactivity (agents react but don't plan ahead), and narrative control vs. autonomy (balancing direction without turning characters into puppets)"
-
-  - name: "Medicine-Voice-ai"
-    url: "https://github.com/YashrajKupekar17/Medicine-Voice-ai"
-    one_liner: "Offline voice AI assistant for pharmacy workflows — handles speech, reasoning, retrieval, and response with zero cloud dependency, fully on-device"
-    tech: ["Python", "Ollama", "Whisper", "FAISS", "SQLite", "Piper TTS"]
-    tradeoffs: "Full edge deployment ensures privacy and low latency but limits model capability compared to cloud LLMs — deliberate tradeoff for the pharmacy use case"
 
   - name: "Ai-representative"
     url: "https://github.com/YashrajKupekar17/Ai-representative"
