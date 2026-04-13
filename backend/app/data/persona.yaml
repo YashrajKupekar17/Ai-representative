@@ -72,8 +72,10 @@ github_repos:
   - name: "Guftagu"
     url: "https://github.com/YashrajKupekar17/Guftagu"
     one_liner: "Multi-character voice conversational system with agent-based storytelling"
+    status: "Ongoing — actively being developed"
     tech: ["Python", "LangGraph", "Voice AI", "MongoDB"]
     tradeoffs: "Focused on multi-agent conversational depth — harder to maintain long-term coherence"
+    next_phases: "Tackling hard agentic problems: long-term coherence (LLMs forget beyond a few thousand tokens), character consistency (personalities drift mid-conversation), proactivity (agents react but don't plan ahead), and narrative control vs. autonomy (balancing authorial direction without turning characters into puppets)"
 
   - name: "Medicine-Voice-ai"
     url: "https://github.com/YashrajKupekar17/Medicine-Voice-ai"
