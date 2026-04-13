@@ -1,0 +1,4 @@
+-r requirements.txt
+ragas==0.4.3
+langchain-openai==0.3.35
+datasets==4.8.4
