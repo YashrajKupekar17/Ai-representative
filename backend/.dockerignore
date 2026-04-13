@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.git
+.gitignore
+test_layer*.py
+evals.py
+evals_report.json
+generate_report.py
+AGENTS.md
+CLAUDE.md
+.claude/

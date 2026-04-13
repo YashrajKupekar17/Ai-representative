@@ -119,15 +119,23 @@ python setup_vapi.py --server-url https://your-public-url.com
 cd backend && python evals.py
 ```
 
-| Category | Tests | Pass Rate |
-|----------|-------|-----------|
-| Groundedness | 4 | 100% |
-| Tool Routing | 3 | 100% |
-| Hallucination | 2 | 100% |
-| Refusal | 3 | 67% |
-| Retrieval Quality | 3 | 100% |
-| Calendar Flow | 1 | 100% |
-| **Total** | **16** | **94%** |
+| Category | Strategy | Tests | Result |
+|----------|----------|-------|--------|
+| Groundedness | Tool-call assertion | 5 | 100% |
+| Tool Routing | Expected-tool matching | 4 | 100% |
+| Hallucination | LLM-as-Judge (GPT-4o-mini) | 3 | 100% |
+| **RAGAS Faithfulness** | RAGAS library | 8 | **0.784** |
+| **RAGAS Answer Relevancy** | RAGAS library | 8 | **0.856** |
+| **RAGAS Context Precision** | RAGAS library | 8 | **1.000** |
+| **RAGAS Context Recall** | RAGAS library | 8 | **0.792** |
+| Refusal & Injection | LLM-as-Judge redirect check | 4 | 100% |
+| Retrieval Quality | Pinecone term matching | 4 | 100% |
+| Latency Profiling | TTFT + total ms | 4 | 100% |
+| Multi-turn Coherence | 3-turn conversation + LLM judge | 3 | 100% |
+| Calendar Flow | E2E slot fetch | 1 | 100% |
+| **Overall** | | **29 custom + 4 RAGAS** | **100% pass** |
+
+**Avg TTFT: ~5s** | **Max TTFT: ~8s**
 
 ## Design Decisions
 

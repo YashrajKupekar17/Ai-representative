@@ -21,6 +21,12 @@ class Settings(BaseSettings):
     # Vapi
     vapi_api_key: str = ""
 
+    # Base URL for the API (used for resume download link etc.)
+    api_base_url: str = "http://localhost:8000"
+
+    # Frontend URL for CORS (comma-separated for multiple origins)
+    frontend_url: str = "http://localhost:3000"
+
     class Config:
         env_file = ".env"
 

@@ -10,7 +10,7 @@ education:
   university: "Scaler School of Technology"
   year: "July 2027"
   highlights:
-    - "Focused on AI systems, LLMs, and distributed systems"
+    - "Focused on AI systems, LLMs, and backend systems"
     - "Built multiple production-grade AI agents and voice systems"
     - "Hands-on experience with real-world deployments (FastAPI, Docker, MongoDB)"
 
@@ -156,8 +156,13 @@ strengths:
   - "Solid fundamentals (RL, LLM internals, algorithms)"
 
 weaknesses:
-  - "Still gaining experience with large-scale distributed systems"
+  - "Still gaining experience with large-scale backend systems"
   - "Early in career but compensates with rapid learning and execution"
+
+links:
+  github: "https://github.com/YashrajKupekar17"
+  blog: "https://yashrajkupekar17.github.io"
+  linkedin: "https://www.linkedin.com/in/yashraj-kupekar-8b3a58243/"
 
 availability:
   timezone: "IST (UTC+5:30)"

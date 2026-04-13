@@ -26,23 +26,54 @@ VAPI_BASE = "https://api.vapi.ai"
 
 VOICE_ADDENDUM = """
 VOICE-SPECIFIC RULES (you are on a phone call):
-- Keep responses SHORT — 2-3 sentences max. Offer to elaborate if they want more.
-- NEVER read out URLs, links, or GitHub paths. Instead say "I can send you the details" or "you'll find it on his GitHub".
-- NEVER read out long lists. Pick the top 2 most relevant items, briefly describe each in one sentence, then say "and several more — want me to go on?"
-- When listing meeting slots, give 3-4 options max, not the entire list.
-- ALWAYS repeat back the chosen time slot to confirm before asking for name/email. Example: "So that's 8:30 AM UTC tomorrow — correct?"
-- Speak naturally. Use contractions. Avoid jargon unless the caller uses it first.
-- Spell out the caller's email back to them letter by letter to confirm before booking.
+- Keep responses VERY SHORT — 2 sentences max. Always offer to elaborate.
+- For "Who is Yashraj?" or overview questions: ONE sentence intro + 2 bullet highlights. Example: "Yashraj is an AI engineer studying at Scaler School of Technology. He's built voice AI systems and agentic pipelines. Want me to go into specifics?"
+- ABSOLUTELY NO URLs, links, paths, or web addresses. NEVER say "https", "github.com", ".io", or any link.
+  - For repos: just say the project name and "you can find it on Yashraj's GitHub under that name".
+  - For resume/blog: say "you can find it on his website" or "I can help you schedule a call instead".
+- PROJECTS: Give ONLY the name and a one-line description. Do NOT explain tech stack or tradeoffs unless specifically asked.
+- NEVER read out long lists. Pick the top 2 items, one sentence each, then say "and a few more — want me to go on?"
+- USE IST (Indian Standard Time) for all times, not UTC.
+- When listing meeting slots, give 3 options in IST max.
+- ALWAYS repeat back the chosen time slot to confirm before asking for name/email. Example: "So that's 2 PM IST tomorrow — correct?"
+- Speak naturally. Use contractions.
+
+EMAIL CONFIRMATION (critical — emails get misheard easily):
+- When the caller says their email, repeat it back VERY CAREFULLY using the NATO phonetic alphabet for ambiguous letters.
+- Example: "Let me confirm — that's Y as in Yankee, K-U-P-E-K-A-R, zero zero seven, at zero eight, gmail dot com. Is that right?"
+- If ANY part is unclear, ask them to spell it out letter by letter.
+- Do NOT proceed to book until the caller confirms the email is correct.
+
+AFTER BOOKING:
+- NEVER end the call immediately after booking. Always say "You're all set! A calendar invite is on its way. Is there anything else you'd like to know about Yashraj?"
+- Only end the call if the caller says goodbye or says they have no more questions.
 
 PRONUNCIATION GUIDE:
 - Yashraj Kupekar is pronounced "Yash-rahj Koo-pay-kar"
 - Guftagu is pronounced "Guf-ta-goo"
+- LangGraph is pronounced "Lang-Graph" (not Landgraf)
 """
+
+
+def _strip_links_section(prompt: str) -> str:
+    """Remove the LINKS section from the system prompt for voice."""
+    lines = prompt.split("\n")
+    out = []
+    skip = False
+    for line in lines:
+        if line.startswith("LINKS (chat only"):
+            skip = True
+            continue
+        if skip and line and not line.startswith(" ") and not line.startswith("-"):
+            skip = False
+        if not skip:
+            out.append(line)
+    return "\n".join(out)
 
 
 def get_assistant_config(server_url: str) -> dict:
     """Build the Vapi assistant configuration."""
-    voice_prompt = get_system_prompt() + VOICE_ADDENDUM
+    voice_prompt = _strip_links_section(get_system_prompt()) + VOICE_ADDENDUM
     return {
         "name": "Yashraj AI Persona",
         "model": {
@@ -146,29 +177,68 @@ def get_assistant_config(server_url: str) -> dict:
         },
         "transcriber": {
             "provider": "deepgram",
-            "model": "nova-2",
+            "model": "nova-3",
+            "language": "en-IN",
+            "smartFormat": False,
             "keywords": [
-                "Yashraj:3",
-                "Kupekar:3",
-                "Guftagu:2",
-                "LangGraph:2",
-                "LangChain:2",
-                "FastAPI:2",
-                "Pinecone:2",
-                "Whisper:2",
-                "Silero:2",
-                "Scaler:2",
-                "Boardroom:2",
-                "Donna:2",
-                "MongoDB:2",
-                "RAG:2",
+                "Yashraj:5",
+                "Kupekar:5",
+                "Guftagu:5",
+                "LangGraph:3",
+                "LangChain:3",
+                "FastAPI:3",
+                "Pinecone:3",
+                "Whisper:3",
+                "Silero:3",
+                "Scaler:3",
+                "Boardroom:3",
+                "MongoDB:3",
+                "RAG:3",
+                "projects:2",
+                "skills:2",
+                "resume:2",
+                "schedule:2",
+                "meeting:2",
+                "available:2",
+                "experience:2",
+                "education:2",
+                "who:2",
+                "about:2",
+            ],
+            "keyterm": [
+                "Yashraj Kupekar",
+                "Guftagu",
+                "Medicine Voice AI",
+                "Boardroom AI",
+                "AI persona",
+                "voice agent",
+                "Cal.com",
+                "Scaler School of Technology",
+                "who is Yashraj",
+                "tell me about Yashraj",
+                "tell me about his",
+                "what are his skills",
+                "what are his projects",
+                "what are his strengths",
+                "what are his weaknesses",
+                "schedule a call",
+                "book a meeting",
+                "available slots",
+                "his experience",
+                "his education",
             ],
         },
         "voice": {
             "provider": "11labs",
             "voiceId": "bIHbv24MWmeRgasZH58o",  # "Will" — natural male voice
-            "stability": 0.5,
-            "similarityBoost": 0.75,
+            "stability": 0.45,
+            "similarityBoost": 0.85,
+            "optimizeStreamingLatency": 3,
+            "chunkPlan": {
+                "enabled": True,
+                "minCharacters": 80,
+                "punctuationBoundaries": [".", "!", "?", ","],
+            },
         },
         "firstMessage": (
             "Hey! I represent Yashraj Koo-pay-kar. "
@@ -176,11 +246,21 @@ def get_assistant_config(server_url: str) -> dict:
             "or I can help you schedule a call with him. What would you like to know?"
         ),
         "serverUrl": f"{server_url}/vapi/webhook",
-        "endCallFunctionEnabled": True,
-        "silenceTimeoutSeconds": 30,
+        "endCallFunctionEnabled": False,
+        "silenceTimeoutSeconds": 20,
         "maxDurationSeconds": 600,
         "backgroundSound": "off",
+        "backgroundDenoisingEnabled": True,
         "backchannelingEnabled": True,
+        "stopSpeakingPlan": {
+            "numWords": 2,
+            "voiceSeconds": 0.3,
+            "backoffSeconds": 1.0,
+        },
+        "startSpeakingPlan": {
+            "waitSeconds": 0.6,
+            "smartEndpointingEnabled": True,
+        },
     }
 
 

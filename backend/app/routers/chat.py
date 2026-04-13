@@ -2,13 +2,16 @@
 
 import json
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from pydantic import BaseModel
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from sse_starlette.sse import EventSourceResponse
 
 from app.core.agent import run_agent_streaming
 
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
 
 
 class ChatRequest(BaseModel):
@@ -16,7 +19,8 @@ class ChatRequest(BaseModel):
 
 
 @router.post("/chat")
-async def chat(req: ChatRequest):
+@limiter.limit("20/minute")
+async def chat(req: ChatRequest, request: Request):
     """
     Stream a chat response via Server-Sent Events.
 
@@ -24,6 +28,8 @@ async def chat(req: ChatRequest):
       - event: token, data: "text chunk"
       - event: sources, data: [{"tool": "...", "args": "..."}]
       - event: done, data: ""
+
+    Rate limited to 20 requests/minute per IP.
     """
 
     def event_generator():
