@@ -7,6 +7,9 @@ An AI agent that represents me — Yashraj Kupekar. It knows about my work, proj
 - **Call:** +1 (539) 238-4323
 - **API:** [ai-representative-production.up.railway.app](https://ai-representative-production.up.railway.app/health)
 
+- Demo Call Recording: [listen](https://storage.vapi.ai/019d8952-55ae-7ff6-a217-2684d10184b5-1776125607309-59850707-ff55-4ee4-94dd-11dfe2d5dc15-mono.wav)
+- Architecture explaination: [how does it work?](https://www.loom.com/share/6f991b87a3ca437b9083a9cfeb8bbf7c)
+
 ---
 
 ## What it does
